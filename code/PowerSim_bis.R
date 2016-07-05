@@ -25,7 +25,7 @@ SimulPvalue <-function(nsamp, b0, b1, x1, ressd){
 
 # set global parameters ----
 
-nsimul = 1000
+nSimul = 1000
 sampSize <- seq(5, 30, 1)
 effectSize <- seq(0.05, .25, 0.01)
 
@@ -39,7 +39,7 @@ for(b1 in effectSize){
   for(nsamp in sampSize){
     set.seed(1)
     x1 <- rnorm(n = nsamp, mean = 100, sd = 20)
-    pTemp <- replicate(n = nsimul, expr = SimulPvalue(nsamp = nsamp, b0 = 10, b1 = b1, x1 = x1, ressd = 1))
+    pTemp <- replicate(n = nSimul, expr = SimulPvalue(nsamp = nsamp, b0 = 10, b1 = b1, x1 = x1, ressd = 1))
     allPvalues[i, 3] <- mean(pTemp)
     i <- i + 1
   }
