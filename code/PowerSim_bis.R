@@ -8,7 +8,6 @@
 # load packages ----
 
 library(ggplot2)
-library(reshape2)
 library(dplyr)
 
 options(scipen = 10000)
