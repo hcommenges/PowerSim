@@ -16,6 +16,7 @@ options(scipen = 10000)
 # create simulation function ----
 
 SimulPvalue <-function(nsamp, b0, b1, x1, ressd){
+  x1 <- rnorm(n = nsamp, mean = 100, sd = 20)
   y <- b0 + b1 * x1 + rnorm(n = nsamp, mean = 0, sd = ressd)
   linMod <- summary(lm(y ~ x1))$coefficients
   pValue <- linMod[2, 4]
@@ -26,7 +27,7 @@ SimulPvalue <-function(nsamp, b0, b1, x1, ressd){
 # set global parameters ----
 
 nSimul = 1000
-sampSize <- seq(5, 30, 1)
+sampSize <- seq(5, 25, 1)
 effectSize <- seq(0.05, .25, 0.01)
 
 
@@ -37,8 +38,6 @@ allPvalues <- expand.grid(SAMPSIZE = sampSize, EFFECTSIZE = effectSize, PVALUE =
 i <- 1
 for(b1 in effectSize){
   for(nsamp in sampSize){
-    set.seed(1)
-    x1 <- rnorm(n = nsamp, mean = 100, sd = 20)
     pTemp <- replicate(n = nSimul, expr = SimulPvalue(nsamp = nsamp, b0 = 10, b1 = b1, x1 = x1, ressd = 1))
     allPvalues[i, 3] <- mean(pTemp)
     i <- i + 1
@@ -56,5 +55,7 @@ ggplot(allPvalues) +
   geom_hline(aes(yintercept = .05), col = "red", linetype = 2) +
   geom_hline(aes(yintercept = .01), col = "red", linetype = 2) +
   theme_bw()
+
+
 
 
