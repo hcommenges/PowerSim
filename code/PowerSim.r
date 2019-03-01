@@ -9,7 +9,7 @@ effect_size_range<-seq(.05,.25,.01); length(effect_size_range) # vector of effec
 
 iter<-1000 # number of iterations for each effect_size-sample_size combination
 b0<-10 # constant term in regression
-
+ fonc = 12
 ##################################################################################################################
 #                                  1 - Simulation function to estimate p-value                                   #
 ##################################################################################################################
